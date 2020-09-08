@@ -238,7 +238,67 @@ value를 html로 보여주는 방법.
 동적 데이터가 있는 컴포넌트가 있으므로, jsx와 props로 인해 모두 재사용할 수 있다.
 
 컴포넌트는 대문자로 시작하는 것에 주의.
+
 -----------------------------------------
+
+#2.2 Dynamic Component Generation
+
+웹사이트에 동적 데이터를 추가하는 방법.
+데이터가 이미 api에서 왔다고 가정.
+
+map은 array의 각 item에서 function을 실행하는 array를 가지는
+JavaScript function이며, 그 function의 result를 갖는 array를 나에게 준다.
+뭔 소리인지 이해하기 위한 과정으로 브라우저 콘솔창에서
+const friends = ["dal", "mark", "lynn", "japan guy"]
+입력
+여기서 이름 옆에 작은 하트를 더하려고 하면,
+friends.map(current =>  {
+    console.log(current);
+    return 0
+})
+
+또는
+
+friends.map(function(current){
+    console.log(current);
+    return 0
+})
+
+실행해보면, 4개의 0을 반환한 item의 array를 가지고 있다.
+map은 function을 취해서 그 function을 array의 각 item에 적용해,
+한 번은 dal에, 한 번은 mark에게... 그리고 각 연산의 결과로 array를 만들고,
+각 연산의 result는 0이다.
+
+friends.map(function(friend){
+    return friend + "❤"
+})
+
+실행하면
+(4) ["dal❤", "mark❤", "lynn❤", "japan guy❤"]
+이렇게 결과가 나타난다.
+
+map은 array를 취하고, 내가 정확히 원하는 array를 반환한다.
+
+
+function App() {
+  return (
+  <div>
+    Hello!
+    {foodILike}
+    </div>
+  )
+}
+여기서 {foodILike} 는 자바스크립트이다.
+
+에러발생
+
+index.js:1 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `App`. See https://fb.me/react-warning-keys for more information.
+    in Food (at App.js:43)
+    in App (at src/index.js:7)
+    in StrictMode (at src/index.js:6)
+    
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
