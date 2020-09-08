@@ -1,11 +1,18 @@
 import React from 'react';
-import Potato from './Potato';
+
+function Food( {fav} ){
+  console.log(fav)
+return <h1>Food is {fav}</h1>
+}
 
 function App() {
   return (
   <div>
     Hello!
-    <Potato />
+    <Food fav="kimchi" />
+    <Food fav="ramen" />
+    <Food fav="meat" />
+    <Food fav="choco" />
     </div>
   )
 }

@@ -154,6 +154,90 @@ jsx는 자바스크립트 안의 html이다.
 
 
 -----------------------------------------
+
+#2.1 Reusable Components with JSX + Props
+
+jsx에서 두번째로 이해해야 하는 것은, 컴포넌트에 정보를 보낼수 있다는 점이다.
+리액트가 멋진 이유는 재사용 가능한 컴포넌트를 만들 수 있다는 점이다.
+
+컴포넌트에서 컴포넌트로, 칠드런 컴포넌트로 정보를 보내는 방법이 있다.
+컴포넌트로 정보를 보내고, 그 다음에 컴포넌트에서 그 정보를 어떻게 사용할 것인가.
+
+
+<Food name="kimchi"/>
+
+Food 컴포넌트에 정보를 보내는 방법이다.
+Food 컴포넌트에 name 이라는 이름의 property를 kimchi라는 value로 주었다.
+
+
+<Food fav="kimchi"/>
+
+Food 컴포넌트에 fav 라는 이름의 property를 kimchi라는 value로 주었다.
+
+이제 어떻게 이 props(property)를 사용할까?
+
+
+<Food
+    fav="kimchi"
+    something={true}
+    papapapa={["hello", 1, 2, 3, 4, true]}
+/>
+
+누군가 Food 컴포넌트로 정보를 보내려고 하면,
+리액트는 이 모든 속성을 가져올 것이다.
+
+그리고
+
+function Food(){
+  return <h1>Food</h1>
+}
+
+food function 컴포넌트의 argument(인자값)으로 그것들을 넣을 것이다.
+
+function Food(props){
+  console.log(props)
+  return <h1>Food</h1>
+}
+
+콘솔로그를 이용하여 브라우저에서 확인해보면
+object가 뜨는데, 이 object는 컴포넌트로 전달 된 모든 props들이다.
+props라고 불리는 한 argument의 내부이다.
+
+
+es6 문법으로
+
+function Food(props){
+  console.log(props.fav)
+  return <h1>Food</h1>
+}
+
+또는
+
+function Food( {fav} ){
+  console.log(fav)
+  return <h1>Food</h1>
+}
+ 
+이런게 있다.
+props.fav 또는 {} 내부에 fav를 쓰는 것은 같은 것이다.
+
+
+function Food( {fav} ){
+  console.log(fav)
+return <h1>Food is {fav}</h1>
+}
+
+value를 html로 보여주는 방법.
+
+
+<Food fav="kimchi" />
+<Food fav="ramen" />
+<Food fav="meat" />
+<Food fav="choco" />
+
+동적 데이터가 있는 컴포넌트가 있으므로, jsx와 props로 인해 모두 재사용할 수 있다.
+
+컴포넌트는 대문자로 시작하는 것에 주의.
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
