@@ -58,6 +58,50 @@ scripts 부분에서 test와 eject는 필요없어서 삭제
 터미널로 movie_app으로 이동 후에 npm start 해서 잘되는지 테스트
 
 -----------------------------------------
+
+#1.2 How does React work?
+
+기본부터 설명하기위해서 대부분을 지움
+
+삭제한 파일
+logo.svg
+serviceWorker.js
+index.css
+App.test.js
+App.css
+
+
+
+function App() {
+  return <div className="App">Hello!</div>
+}
+
+public 폴더의 index.html 파일에 가면
+<div id="root"></div> 는 비어있다.
+하지만 브라우저에서 내 localhost에 있는 div id="root"는
+내부에 Hello를 갖고 있다.
+
+리액트가 무엇이냐면, 리액트는 당신이 거기에 쓰는 모든 요소를 생성한다는 것이다.
+자바스크립트와 함게 그것들을 만들고, 그것들을 html에 넣는다.
+리액트는 index.html의 div id="root"에 element를 넣는 역할을 담당한다.
+
+index.js 파일을 보면
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+ReactDOM.render 은 <App />을 render하려고 하는데,
+document.getElementById('root') 으로 render한다.
+
+virtual DOM이라는게 있다.
+virtual document object model
+index.html의 소스코드에는 존재하지않지만, reac가 그걸 만들어낸다.
+이게 리액트가 빠른 이유이다.
+
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
