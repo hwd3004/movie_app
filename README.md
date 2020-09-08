@@ -300,6 +300,107 @@ Check the render method of `App`. See https://fb.me/react-warning-keys for more 
     in StrictMode (at src/index.js:6)
     
 -----------------------------------------
+
+#2.3 map Recap
+
+map 연습
+
+function renderFood(dish){
+  console.log(dish)
+}
+
+function App() {
+  return (
+  <div>
+    {foodILike.map(renderFood)}
+    </div>
+  )
+}
+
+콘솔창에 foodILike의 데이터들 확인 가능
+
+App.js에서
+
+import React from 'react';
+
+function Food({ name, picture }) {
+  return (
+    <div>
+      <h2>I like {name}</h2>
+      <img src={picture}></img>
+    </div>
+  );
+}
+
+const foodILike = [
+    데이터
+];
+
+function renderFood(dish){
+  return <Food name={dish.name} picture={dish.image} />
+}
+
+function App() {
+  return (
+  <div>
+    {foodILike.map(renderFood)}
+    </div>
+  )
+}
+
+export default App;
+
+했더니 이번엔 이미지가 제대로 뜬다. key 관련 에러는 여전히 뜬다.
+
+
+function App() {
+  return (
+  <div>
+    {foodILike.map(renderFood)}
+    {console.log(foodILike.map(renderFood))}
+    </div>
+  )
+}
+
+콘솔창에서 확인해보면 이상한 array가 뜨는데,
+이것들이 기본적으로 리액트 컴포넌트이다.
+foodILike.map(renderFood) 를 하면
+기본적으로 여기에 Food 컴포는트와 같은 array를 가져오게 된다.
+
+
+App 컴포넌트를
+function App() {
+  return (
+    <div>
+      {foodILike.map(dish => (
+        <Food name={dish.name} picture={dish.image} />
+      ))}
+    </div>
+  )
+}
+으로 다시 바꿨는데 이번엔 이미지가 잘뜬다.
+이전엔 오타가 있었던 듯하다.
+
+
+key 오류
+Warning: Each child in a list should have a unique "key" prop.
+각각 list 내의 child는 unique한 key prop을 가져야한다.
+
+모든 리액트의 element들은 유일해야하고,
+이들을 list 안으로 집어넣을때, 이들은 유일성을 잃어버린다.
+그래서 각 item들에 id를 추가해야한다.
+
+<Food key={dish.id} name={dish.name} picture={dish.image} />
+
+이제 key 에러가 뜨지않는다.
+key prop은 Food로 전달하지않았다.
+이것은 기본적으로 리액트 내부에서 사용하기 위한 것이기때문이다.
+
+그리고 브라우저의 콘솔창에서 웹 표준과 관련된 이미지 alt 관련 주의사항이 뜨는데,
+Food 컴포넌트에서
+<img src={picture} alt={name}></img>
+코드를 수정하였다.
+
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
