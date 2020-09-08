@@ -1,68 +1,83 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#0 Introduction
 
-## Available Scripts
+nomad corder 의 reactJS 기초 강의를 보고 따라하면서
+영화 웹 서비스 만들기
 
-In the project directory, you can run:
+-----------------------------------------
 
-### `npm start`
+#0.1 Requirements
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+nodejs 설치
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+npx 설치
+npm install npx -g
 
-### `npm test`
+git 설치
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-----------------------------------------
 
-### `npm run build`
+#0.2 Theory Requirements
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+html, css, js 기본실력 필요
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+-----------------------------------------
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#0.3 Why React
 
-### `npm run eject`
+왜 리액트인가?
+일단 리액트는 페이스북이 만들었다.
+모든 페북은 리액트로 돌아간다.
+에어비앤비, 넷플릭스, 스포티파이, 슬랙 등등 많은 웹사이트들이 리액트를 사용한다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-----------------------------------------
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#1.0 Creating your first React App
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+리액트만 사용할수는 없다. 몇가지 해줘야만 하는게 있다.
+이유는 리액트가 매우 현대적인 코드와 동작하기 때문이다.
+섹시한 코드와 아름다운 컴포넌트를 만들고, 아름다운 웹사이트를 만들 수 있다.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+문제는 어리석은 브라우저가 이 코드를 이해하지 못하기때문에,
+이 코드를 못생긴 코드로 바꿔줘야만 한다.
 
-## Learn More
+이것을 설정하기 위해 몇가지 단계가 필요하다.
+webpack을 다운로드해야하고, babel을 다운로드해야한다.
+그런 다음에 리액트 코드를 컴파일해야하고 등등의 과정이 많다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+하지만 create react app 을 이용하면 해결된다.
+터미널에
+npx create-react-app movie_app
+를 입력하면 movie_app 폴더를 하나 생성하고, 패키지가 설치된다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+설치가 완료되면
+package.json 에서
+scripts 부분에서 test와 eject는 필요없어서 삭제
 
-### Code Splitting
+맨위의 name은 어플리케이션 이름
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+터미널로 movie_app으로 이동 후에 npm start 해서 잘되는지 테스트
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
