@@ -402,6 +402,74 @@ Food 컴포넌트에서
 코드를 수정하였다.
 
 -----------------------------------------
+
+#2.4 Protction with PropTypes
+
+우리가 원하는 Props를 받고 있는지 체크할 수 있는 방법.
+father 컴포넌트로부터 전달받은 props가 우리가 예상한 props인지 확인.
+
+터미널에 npm install prop-types
+
+prop-types는 내가 전달받은 props가 내가 원하는 props인지를 확인해줌.
+
+App.js 에서
+import PropTypes from 'prop-types' 추가
+
+강의영상에서 Fail to compile 에러가 뜨는데
+npm install 이후 npm start 를 하니 에러가 해결되었다.
+
+
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired
+}
+
+브라우저를 보면 시각적으로 에러는 없다.
+하지만 콘솔창을 보면 Failed prop type 에러가 뜬다.
+rating의 type은 숫자로 제공됐지만 string을 받고 있다.
+
+rating: PropTypes.number.isRequired
+
+
+picture를 보내야하는데 image를 보내는 실수를 할 수도 있다.
+
+function App() {
+  return (
+    <div>
+      {foodILike.map(dish => (
+        <Food key={dish.id} name={dish.name} image={dish.image} rating={dish.rating} />
+      ))}
+    </div>
+  )
+}
+
+Failed prop type: The prop `picture` is marked as required in `Food`, but its value is `undefined`.
+
+이런 string 또는 number 같은 예제뿐만 아니라,
+array인지, boolean인지, true인지, false인지, object인지, 있는지 없는제 체크할 수 있다.
+
+하나의 예로, isRequired를 반드시 체크할 필요는 없다.
+
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+  rating: PropTypes.number
+}
+
+rating의 isRequired를 지우고, FoodILikes 에서 kimchi 의 rating을 지웠다.
+브라우저의 콘솔창을 보면 에러가 없다.
+
+Food의 rating이 number여야하지만, 필수는 아니게 된다.
+number 또는 undefined가 된다는 말이다.
+
+rating의 값을 문자로 변경해보면,
+Failed prop type: Invalid prop `rating` of type `string` supplied to `Food`, expected `number`
+에러가 뜬다.
+
+prop types 매뉴얼
+https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
