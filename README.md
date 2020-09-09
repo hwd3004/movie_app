@@ -403,7 +403,7 @@ Food 컴포넌트에서
 
 -----------------------------------------
 
-#2.4 Protction with PropTypes
+#2.4 Protection with PropTypes
 
 우리가 원하는 Props를 받고 있는지 체크할 수 있는 방법.
 father 컴포넌트로부터 전달받은 props가 우리가 예상한 props인지 확인.
@@ -471,6 +471,136 @@ prop types 매뉴얼
 https://ko.reactjs.org/docs/typechecking-with-proptypes.html
 
 -----------------------------------------
+
+#3.0 Class Components and State
+
+App.js의 Food 코드들을 지운다.
+State에 대해 알아야하는데, Food 코드들은 이걸 위해 동작하기 않기 때문이다.
+State는 동적 데이터와 함께 작업할때 만들어진다. 변하는 데이터, 존재하지 않는 데이터.
+생겨나고 사라지고 변경되는 데이터, 하나였다가 두개였다가 0이 되는 데이터.
+이런 것들이 dynamic data 이다. 그리고 이런 props에 필요한 것이 State이다.
+
+
+function App() {
+
+}
+
+이 컴포넌트는 functiopn App을 수행한다.
+
+이런 것들을 function 컴포넌트라고 부른다.
+
+
+class App extends React.Component {
+  
+}
+
+클래스 컴포넌트로 바꾼다.
+React.Component 는 필수이고, 뒤에 많은 것을 가지고 있다. 그 중 하나가 state이다.
+매번 컴포넌트를 만들 때마다 모든 것을 다 구현하고 싶지않다.
+이게 extends 하는 이유이다.
+
+예를 들면 baby(애기)는 human(사람)에서 확장되고, human으로부터 모든 것(특징)을
+가져올 수 있고, 그것으로부터 확장된다.
+
+Samsung은 cell phone class에서 확장된 것이다.
+만약 비디오 게임 개발을 한다면 Samsung을 프로그래밍하지않고, cell phone을 프로그래밍 한다.
+cell phone은 많은 특성들을 가지고 있다. 예를 들어 screen, camera, charger
+
+아이폰과 삼성은 이러한 것을 공유한다.
+camera, screen, charger를 cell phone class에 넣은 다음,
+cell phone class에서 확장한 samsung class를 가지게 된다.
+
+
+
+class App extends React.Component {
+  
+}
+
+React.Component 에서 가져오고, React.Component 에서 확장하고,
+App 컴포넌트는 React.Component 가 된다.
+
+리액트 컴포넌트는 return을 가지고 있지않다.
+function 이 아니기 때문이다.
+render method 를 가지고 있고, App 컴포넌트 안에 있다.
+
+class App extends React.Component {
+  render(){
+    return <h1>I am a class Component</h1>
+  }
+}
+
+리액트 컴포넌트는 render method를 가지고 있지만, extends from을 했기 때문에
+App 컴포넌트도 이제 render method가 있다.
+
+
+
+function 컴포넌트는 뭔가를 return하고 스크린에 표시된다.
+클래스 컴포넌트는 리액트 컴포넌트로부터 확장되고, 스크린에 표시된다.
+
+리액트는 자동적으로 모든 클래스 컴포넌트의 렌더 메소드를 실행하고자 한다.
+
+클래스 컴포넌트는 state 를 가지고 있다.
+state는 오브젝트이고, 컴포넌트의 데이터를 넣을 공간이 있다. 이 데이터는 변한다.
+
+class App extends React.Component {
+  state = {
+    count: 0
+  }
+  render(){
+    return <h1>The number is {this.state.count}</h1>
+  }
+}
+
+여기서 state에 바꾸고 싶은 data를 넣는데, App에서 data를 어떻게 바꿀 것인가가 중요하다.
+
+
+
+class App extends React.Component {
+  state = {
+    count: 0
+  }
+  render(){
+    return (
+    <div>
+      <h1>The Number is {this.state.count}</h1>
+      <button>Add</button>
+      <button>Minus</button>
+    </div>
+    )
+  }
+}
+
+state가 클래스 컴포넌트에 있기때문에, this.state를 할 필요가 있다.
+ReactJS는 자바스크립트이다. 그래서 자바스크립트를 쓸 수 있다.
+
+
+
+class App extends React.Component {
+  state = {
+    count: 0
+  }
+
+  add = function () {
+    console.log('add')
+  }
+
+  minus = function () {
+    console.log('minus')
+  }
+
+  render(){
+    return (
+    <div>
+      <h1>The Number is {this.state.count}</h1>
+      <button onClick={this.add}>Add</button>
+      <button onClick={this.minus}>Minus</button>
+    </div>
+    )
+  }
+}
+
+여기서 onClick은 자바스크립트의 onClick과는 다른, 리액트의 onClick이다.
+
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
