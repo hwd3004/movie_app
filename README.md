@@ -402,8 +402,286 @@ Food 컴포넌트에서
 코드를 수정하였다.
 
 -----------------------------------------
+
+#2.4 Protection with PropTypes
+
+우리가 원하는 Props를 받고 있는지 체크할 수 있는 방법.
+father 컴포넌트로부터 전달받은 props가 우리가 예상한 props인지 확인.
+
+터미널에 npm install prop-types
+
+prop-types는 내가 전달받은 props가 내가 원하는 props인지를 확인해줌.
+
+App.js 에서
+import PropTypes from 'prop-types' 추가
+
+강의영상에서 Fail to compile 에러가 뜨는데
+npm install 이후 npm start 를 하니 에러가 해결되었다.
+
+
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired
+}
+
+브라우저를 보면 시각적으로 에러는 없다.
+하지만 콘솔창을 보면 Failed prop type 에러가 뜬다.
+rating의 type은 숫자로 제공됐지만 string을 받고 있다.
+
+rating: PropTypes.number.isRequired
+
+
+picture를 보내야하는데 image를 보내는 실수를 할 수도 있다.
+
+function App() {
+  return (
+    <div>
+      {foodILike.map(dish => (
+        <Food key={dish.id} name={dish.name} image={dish.image} rating={dish.rating} />
+      ))}
+    </div>
+  )
+}
+
+Failed prop type: The prop `picture` is marked as required in `Food`, but its value is `undefined`.
+
+이런 string 또는 number 같은 예제뿐만 아니라,
+array인지, boolean인지, true인지, false인지, object인지, 있는지 없는제 체크할 수 있다.
+
+하나의 예로, isRequired를 반드시 체크할 필요는 없다.
+
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+  rating: PropTypes.number
+}
+
+rating의 isRequired를 지우고, FoodILikes 에서 kimchi 의 rating을 지웠다.
+브라우저의 콘솔창을 보면 에러가 없다.
+
+Food의 rating이 number여야하지만, 필수는 아니게 된다.
+number 또는 undefined가 된다는 말이다.
+
+rating의 값을 문자로 변경해보면,
+Failed prop type: Invalid prop `rating` of type `string` supplied to `Food`, expected `number`
+에러가 뜬다.
+
+prop types 매뉴얼
+https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+
 -----------------------------------------
+
+#3.0 Class Components and State
+
+App.js의 Food 코드들을 지운다.
+State에 대해 알아야하는데, Food 코드들은 이걸 위해 동작하기 않기 때문이다.
+State는 동적 데이터와 함께 작업할때 만들어진다. 변하는 데이터, 존재하지 않는 데이터.
+생겨나고 사라지고 변경되는 데이터, 하나였다가 두개였다가 0이 되는 데이터.
+이런 것들이 dynamic data 이다. 그리고 이런 props에 필요한 것이 State이다.
+
+
+function App() {
+
+}
+
+이 컴포넌트는 functiopn App을 수행한다.
+
+이런 것들을 function 컴포넌트라고 부른다.
+
+
+class App extends React.Component {
+  
+}
+
+클래스 컴포넌트로 바꾼다.
+React.Component 는 필수이고, 뒤에 많은 것을 가지고 있다. 그 중 하나가 state이다.
+매번 컴포넌트를 만들 때마다 모든 것을 다 구현하고 싶지않다.
+이게 extends 하는 이유이다.
+
+예를 들면 baby(애기)는 human(사람)에서 확장되고, human으로부터 모든 것(특징)을
+가져올 수 있고, 그것으로부터 확장된다.
+
+Samsung은 cell phone class에서 확장된 것이다.
+만약 비디오 게임 개발을 한다면 Samsung을 프로그래밍하지않고, cell phone을 프로그래밍 한다.
+cell phone은 많은 특성들을 가지고 있다. 예를 들어 screen, camera, charger
+
+아이폰과 삼성은 이러한 것을 공유한다.
+camera, screen, charger를 cell phone class에 넣은 다음,
+cell phone class에서 확장한 samsung class를 가지게 된다.
+
+
+
+class App extends React.Component {
+  
+}
+
+React.Component 에서 가져오고, React.Component 에서 확장하고,
+App 컴포넌트는 React.Component 가 된다.
+
+리액트 컴포넌트는 return을 가지고 있지않다.
+function 이 아니기 때문이다.
+render method 를 가지고 있고, App 컴포넌트 안에 있다.
+
+class App extends React.Component {
+  render(){
+    return <h1>I am a class Component</h1>
+  }
+}
+
+리액트 컴포넌트는 render method를 가지고 있지만, extends from을 했기 때문에
+App 컴포넌트도 이제 render method가 있다.
+
+
+
+function 컴포넌트는 뭔가를 return하고 스크린에 표시된다.
+클래스 컴포넌트는 리액트 컴포넌트로부터 확장되고, 스크린에 표시된다.
+
+리액트는 자동적으로 모든 클래스 컴포넌트의 렌더 메소드를 실행하고자 한다.
+
+클래스 컴포넌트는 state 를 가지고 있다.
+state는 오브젝트이고, 컴포넌트의 데이터를 넣을 공간이 있다. 이 데이터는 변한다.
+
+class App extends React.Component {
+  state = {
+    count: 0
+  }
+  render(){
+    return <h1>The number is {this.state.count}</h1>
+  }
+}
+
+여기서 state에 바꾸고 싶은 data를 넣는데, App에서 data를 어떻게 바꿀 것인가가 중요하다.
+
+
+
+class App extends React.Component {
+  state = {
+    count: 0
+  }
+  render(){
+    return (
+    <div>
+      <h1>The Number is {this.state.count}</h1>
+      <button>Add</button>
+      <button>Minus</button>
+    </div>
+    )
+  }
+}
+
+state가 클래스 컴포넌트에 있기때문에, this.state를 할 필요가 있다.
+ReactJS는 자바스크립트이다. 그래서 자바스크립트를 쓸 수 있다.
+
+
+
+class App extends React.Component {
+  state = {
+    count: 0
+  }
+
+  add = function () {
+    console.log('add')
+  }
+
+  minus = function () {
+    console.log('minus')
+  }
+
+  render(){
+    return (
+    <div>
+      <h1>The Number is {this.state.count}</h1>
+      <button onClick={this.add}>Add</button>
+      <button onClick={this.minus}>Minus</button>
+    </div>
+    )
+  }
+}
+
+여기서 onClick은 자바스크립트의 onClick과는 다른, 리액트의 onClick이다.
+
 -----------------------------------------
+
+#3.1 All you need to know about State
+
+add = function () {
+    this.state.count = 1
+  }
+
+이런 식으로 state를 직접 변경하려 하면 터미널에서
+Line 10:5:  Do not mutate state directly. Use setState()  react/no-direct-mutation-state
+메세지가 뜬다. setState()를 사용하라고 한다.
+그와 함께 리액트는 render function을 refresh하지 않는다.
+
+매번 state의 상태를 변경할 때, render function을 호출해서 바꿔주어야 한다.
+
+setState function을 호출하면, 리액트는 그에 따라 view와 render function을 refresh한다.
+
+
+add = function () {
+  this.setState({count:1})
+}
+
+minus = function () {
+  this.setState({count:-1})
+}
+
+state는 object인 것에 주의.
+
+npm start를 하였는데 따로 설치한 eslint와 충돌하여 movie_app을 지우고 새로 설치했다......
+
+react 설치시 자동으로 함께 설치되는 typescript-eslint와 충돌이 일어난건가?
+
+다시 이것저것해주고 npm start를 했더니
+App.js:10 Uncaught TypeError: Cannot read property 'setState' of undefined
+에러 발생
+
+add와 minus 함수를
+
+add = () => {
+this.setState({count:1})
+}
+
+minus = () => {
+this.setState({count:-1})
+}
+
+es6 arrow function으로 변경하였더니 잘되었다.
+
+'this'가 자동으로 바인딩 되는 것에 따르는 것에 대한 댓글이 있는데, 잘모르겠다.
+
+
+add = () => {
+this.setState({ count: this.state.count + 1 })
+}
+
+minus = () => {
+this.setState( {count: this.state.count - 1 })
+}
+
+이건 좋지 않은 코드이다.
+성능 문제가 발생할 수 있다.
+
+
+
+add = () => {
+    this.setState( current => ({ count: current.count + 1 }) )
+}
+
+minus = () => {
+    this.setState( current => ({ count: current.count - 1 }) )
+}
+
+this.state.count로 하는 대신에, current를 가져와서 한다.
+이것이 state를 set할 때, 리액트에서 외부의 상태에 의존하지 않는 가장 좋은 방법이다.
+
+정리하면,
+매 순간 setState를 호출할 때마다, 리액트는 새로운 state와 함께
+render function을 호출할 것이다.
+오직 setState를 할때만이다.
+this.state.count = 1 이라고 하면, 아무 일도 일어나지 않는다.
+
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
